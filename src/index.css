@@ -790,3 +790,12 @@ span.flatpickr-weekday,
 .simplebar-scrollbar.simplebar-visible:before {
   @apply opacity-100;
 }
+
+
+/* For Search Bar Conent */
+.custom-btn {
+  color: #ffffff;
+  border: 1px solid;
+  padding: 6px;
+  border-radius: 6px;
+}
