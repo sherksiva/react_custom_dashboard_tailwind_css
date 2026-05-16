@@ -9,38 +9,39 @@
 import { useState, useEffect } from 'react';
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
+import { useApi } from "../../hooks/useApi";
 
+interface PostItem {
+  id: number;
+  title: string;
+}
 
 export default function SearchComponent() {
 
     //For Search Component
-    const [customData, setCustomData] = useState([]);
-    const [originalData, setOringinalData] = useState([]);
+    const [customData, setCustomData] = useState<PostItem[]>([]);
+    const [originalData, setOriginalData] = useState<PostItem[]>([]);
     const [searchInput, setSearchInput] = useState("");
 
-    // Get Api Funnction
-    const getApiData = async()=> {
-
-        try {
-        const getApi = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=20');
-
-        const response = await getApi.json();
-
-        if(response && response.length > 0) {
-            setCustomData(response);
-            setOringinalData(response);
-        }
-
-        }catch(e){
-        console.log(e);
-        }
-
-    }
+    const { data, error, loading, fetchData } = useApi<PostItem[]>();
 
     //Component inital Effect
-    useEffect(()=> {
-        getApiData();
-    }, []);
+    useEffect(() => {
+        fetchData('https://jsonplaceholder.typicode.com/posts?_limit=20');
+    }, [fetchData]);
+
+    useEffect(() => {
+      if (data) {
+        setCustomData(data);
+        setOriginalData(data);
+      }
+    }, [data]);
+
+    useEffect(() => {
+      if (error) {
+        console.error(error);
+      }
+    }, [error]);
 
     const clearAction = () => {
         setSearchInput("");
@@ -85,6 +86,8 @@ export default function SearchComponent() {
                         Clear
                     </button>
                 </div>
+                {loading && <p className="text-sm text-gray-500 dark:text-gray-400">Loading results…</p>}
+                {error && <p className="text-sm text-red-600 dark:text-red-400">Error: {error}</p>}
                 {
                     customData && customData.length > 0 && 
 
