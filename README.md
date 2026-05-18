@@ -46,9 +46,11 @@ git clone https://github.com/sherksiva/react_custom_dashboard_tailwind_css.git
 
 ### Custom Search Hook
 <img src="https://github.com/sherksiva/sherksiva/blob/main/assets/custom_search.png" alt="Custom Search with Custom Hook"/>
+
 ### Form Elements with output 
 <img src="https://github.com/sherksiva/sherksiva/blob/main/assets/form_elements.png" alt="Form Elements" />
-### TO Do Component
+
+### TO DO Component
 <img src="https://github.com/sherksiva/sherksiva/blob/main/assets/toDo.png" alt="To Do App" />
 
 ## License
