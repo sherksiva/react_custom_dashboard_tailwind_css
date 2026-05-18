@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router";
 
 // Assume these icons are imported from an icon library
 import {
-  // BoxCubeIcon,
+  BoxCubeIcon,
   // CalenderIcon,
   ChevronDownIcon,
   GridIcon,
@@ -58,11 +58,11 @@ const navItems: NavItem[] = [
     icon: <ListIcon />,
     subItems: [{ name: "Complete Form", path: "/complete-form", pro: false }],
   },
-  // {
-  //   name: "Tables",
-  //   icon: <TableIcon />,
-  //   subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-  // },
+  {
+    name: "Style Matrix",
+    icon: <BoxCubeIcon />,
+    path: "/style-matrix",
+  },
   // {
   //   name: "Pages",
   //   icon: <PageIcon />,
@@ -385,7 +385,6 @@ const AppSidebar: React.FC = () => {
             </div>
           </div>
         </nav>
-        {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
       </div>
     </aside>
   );
