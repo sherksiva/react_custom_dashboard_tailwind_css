@@ -8,11 +8,12 @@ import {
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
-  // ListIcon,
+  ListIcon,
   // PageIcon,
   // PieChartIcon,
   // PlugInIcon,
   // TableIcon,
+  TaskIcon,
   UserCircleIcon,
   EnvelopeIcon,
 } from "../icons";
@@ -47,11 +48,16 @@ const navItems: NavItem[] = [
     name: "Search Bar",
     path: "/search",
   },
-  // {
-  //   name: "Forms",
-  //   icon: <ListIcon />,
-  //   subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  // },
+  {
+    icon: <TaskIcon />,
+    name: "ToDo",
+    path: "/todo",
+  },
+  {
+    name: "Forms",
+    icon: <ListIcon />,
+    subItems: [{ name: "Complete Form", path: "/complete-form", pro: false }],
+  },
   // {
   //   name: "Tables",
   //   icon: <TableIcon />,

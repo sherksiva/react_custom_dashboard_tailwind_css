@@ -1,31 +1,29 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import SignIn from "./pages/AuthPages/SignIn";
-import SignUp from "./pages/AuthPages/SignUp";
-import NotFound from "./pages/OtherPage/NotFound";
-import UserProfiles from "./pages/UserProfiles";
-// import Videos from "./pages/UiElements/Videos";
-// import Images from "./pages/UiElements/Images";
-// import Alerts from "./pages/UiElements/Alerts";
-// import Badges from "./pages/UiElements/Badges";
-// import Avatars from "./pages/UiElements/Avatars";
-// import Buttons from "./pages/UiElements/Buttons";
-// import LineChart from "./pages/Charts/LineChart";
-// import BarChart from "./pages/Charts/BarChart";
-// import Calendar from "./pages/Calendar";
-// import BasicTables from "./pages/Tables/BasicTables";
-// import FormElements from "./pages/Forms/FormElements";
-// import Blank from "./pages/Blank";
-import SearchComponent from "./pages/Searchbar/searchbar";
+import React, { Suspense, lazy } from "react";
+const SignIn = lazy(() => import("./pages/AuthPages/SignIn"));
+const SignUp = lazy(() => import("./pages/AuthPages/SignUp"));
+const NotFound = lazy(() => import("./pages/OtherPage/NotFound"));
+const UserProfiles = lazy(() => import("./pages/UserProfiles"));
+const SearchComponent = lazy(() => import("./pages/Searchbar/searchbar"));
+const ToDo = lazy(() => import("./pages/ToDo/ToDo"));
+const Home = lazy(() => import("./pages/Dashboard/Home"));
+const CompleteForm = lazy(() => import("./pages/Forms/CompleteForm"));
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
-import Home from "./pages/Dashboard/Home";
 
 export default function App() {
   return (
     <>
       <Router>
         <ScrollToTop />
-        <Routes>
+        <Suspense
+          fallback={
+            <div className="min-h-screen flex items-center justify-center text-base text-gray-600 dark:text-gray-300">
+              Loading...
+            </div>
+          }
+        >
+          <Routes>
           {/* Dashboard Layout */}
           <Route element={<AppLayout />}>
             <Route index path="/" element={<Home />} />
@@ -35,7 +33,9 @@ export default function App() {
             {/* <Route path="/calendar" element={<Calendar />} /> */}
             {/* <Route path="/blank" element={<Blank />} /> */}
             <Route path="/search" element={<SearchComponent />} />
+            <Route path="/todo" element={<ToDo />} />
             {/* Forms */}
+            <Route path="/complete-form" element={<CompleteForm />} />
             {/* <Route path="/form-elements" element={<FormElements />} /> */}
 
             {/* Tables */}
@@ -60,7 +60,8 @@ export default function App() {
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </Suspense>
       </Router>
     </>
   );

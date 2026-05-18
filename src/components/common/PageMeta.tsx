@@ -8,8 +8,8 @@ const PageMeta = ({
   description: string;
 }) => (
   <Helmet>
-    <title>React Dashboard</title>
-    <meta name="description" content="A modern React dashboard with Tailwind CSS" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
   </Helmet>
 );
 
