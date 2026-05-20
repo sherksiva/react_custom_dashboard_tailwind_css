@@ -231,6 +231,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                     aria-selected={isSelected}
                   >
                     <div className="relative flex w-full items-center p-2 pl-2">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        readOnly
+                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
+                        tabIndex={-1}
+                      />
                       <div className="mx-2 leading-6 text-gray-800 dark:text-white/90">
                         {option.text}
                       </div>

@@ -5,7 +5,9 @@ import Form from "../../components/form/Form";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import Select from "../../components/form/Select";
+import MultiSelect from "../../components/form/MultiSelect";
 import Checkbox from "../../components/form/input/Checkbox";
+import Radio from "../../components/form/input/Radio";
 import DatePicker from "../../components/form/date-picker";
 import { EyeCloseIcon, EyeIcon } from "../../icons";
 
@@ -22,6 +24,8 @@ interface FormDataType {
   dateOfBirth: string;
   agreeTerms: boolean;
   subscribenews: boolean;
+  gender: string;
+  skills: string[];
   message: string;
 }
 
@@ -40,6 +44,8 @@ export default function CompleteForm() {
     dateOfBirth: "",
     agreeTerms: false,
     subscribenews: false,
+    gender: "",
+    skills: [],
     message: "",
   });
 
@@ -56,6 +62,20 @@ export default function CompleteForm() {
     { value: "canada", label: "Canada" },
     { value: "india", label: "India" },
     { value: "australia", label: "Australia" },
+  ];
+
+  const genderOptions = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+    { value: "other", label: "Other" },
+  ];
+
+  const skillOptions = [
+    { value: "ui-design", text: "UI Design" },
+    { value: "frontend", text: "Front-end Development" },
+    { value: "backend", text: "Back-end Development" },
+    { value: "product", text: "Product Management" },
+    { value: "marketing", text: "Marketing" },
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -80,10 +100,24 @@ export default function CompleteForm() {
     }));
   };
 
+  const handleRadioChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      gender: value,
+    }));
+  };
+
   const handleDateChange = (value: string) => {
     setFormData((prev) => ({
       ...prev,
       dateOfBirth: value,
+    }));
+  };
+
+  const handleSkillsChange = (skills: string[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills,
     }));
   };
 
@@ -261,6 +295,35 @@ export default function CompleteForm() {
               />
             </div>
 
+            {/* Skills */}
+            <div>
+              <MultiSelect
+                label="Skills"
+                options={skillOptions}
+                value={formData.skills}
+                onChange={handleSkillsChange}
+                placeholder="Select your skills"
+              />
+            </div>
+
+            {/* Gender */}
+            <div>
+              <Label>Gender</Label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {genderOptions.map((option) => (
+                  <Radio
+                    key={option.value}
+                    id={`gender-${option.value}`}
+                    name="gender"
+                    value={option.value}
+                    label={option.label}
+                    checked={formData.gender === option.value}
+                    onChange={handleRadioChange}
+                  />
+                ))}
+              </div>
+            </div>
+
             {/* Zip Code */}
             <div>
               <Label htmlFor="zipCode">Zip Code</Label>
@@ -348,6 +411,8 @@ export default function CompleteForm() {
                     dateOfBirth: "",
                     agreeTerms: false,
                     subscribenews: false,
+                    gender: "",
+                    skills: [],
                     message: "",
                   });
                 }}
@@ -422,8 +487,14 @@ export default function CompleteForm() {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Zip Code:
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">                Gender:
+              </p>
+              <p className="text-gray-900 dark:text-white">
+                {formData.gender ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) : "N/A"}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">                Zip Code:
               </p>
               <p className="text-gray-900 dark:text-white">
                 {formData.zipCode || "N/A"}
@@ -435,6 +506,14 @@ export default function CompleteForm() {
               </p>
               <p className="text-gray-900 dark:text-white">
                 {formData.dateOfBirth || "N/A"}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Skills:
+              </p>
+              <p className="text-gray-900 dark:text-white">
+                {formData.skills.length > 0 ? formData.skills.join(", ") : "N/A"}
               </p>
             </div>
             <div>
