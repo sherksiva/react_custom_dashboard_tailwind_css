@@ -8,6 +8,8 @@ const SearchComponent = lazy(() => import("./pages/Searchbar/searchbar"));
 const ToDo = lazy(() => import("./pages/ToDo/ToDo"));
 const Home = lazy(() => import("./pages/Dashboard/Home"));
 const CompleteForm = lazy(() => import("./pages/Forms/CompleteForm"));
+const Roles = lazy(() => import("./pages/OtherPage/Roles"));
+const Permissions = lazy(() => import("./pages/OtherPage/Permissions"));
 const StyleMatrix = lazy(() => import("./components/common/StyleMatrix"));
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
@@ -32,6 +34,8 @@ export default function App() {
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/style-matrix" element={<StyleMatrix />} />
+            <Route path="/roles" element={<Roles />} />
+            <Route path="/permissions" element={<Permissions />} />
             {/* <Route path="/calendar" element={<Calendar />} /> */}
             {/* <Route path="/blank" element={<Blank />} /> */}
             <Route path="/search" element={<SearchComponent />} />

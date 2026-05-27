@@ -44,6 +44,14 @@ const navItems: NavItem[] = [
     path: "/profile",
   },
   {
+    icon: <UserCircleIcon />,
+    name: "Roles & Permissions",
+    subItems: [
+      { name: "Roles", path: "/roles", pro: false },
+      { name: "Permissions", path: "/permissions", pro: false },
+    ],
+  },
+  {
     icon: <EnvelopeIcon />,
     name: "Search Bar",
     path: "/search",

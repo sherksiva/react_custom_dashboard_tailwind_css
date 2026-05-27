@@ -188,6 +188,10 @@ layer(base);
   body {
     @apply relative font-normal font-outfit z-1 bg-gray-50;
   }
+  /* Make headings white by default */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white;
+  }
 }
 
 @utility menu-item {

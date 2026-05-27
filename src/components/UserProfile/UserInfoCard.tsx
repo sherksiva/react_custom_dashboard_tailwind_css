@@ -3,12 +3,20 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import Select from "../form/Select";
+import { roleTypes } from "../../data/roles";
+import { permissionTypes } from "../../data/permissions";
+import { useState } from "react";
 
 export default function UserInfoCard() {
   const { isOpen, openModal, closeModal } = useModal();
+  const [selectedRole, setSelectedRole] = useState<string>(roleTypes[0]?.id || "");
+  const [selectedPermissions, setSelectedPermissions] = useState<string[]>(
+    () => permissionTypes.slice(0, 1).map((p) => p.id) // default: first permission
+  );
   const handleSave = () => {
     // Handle save logic here
-    console.log("Saving changes...");
+    console.log("Saving changes...", { selectedRole, selectedPermissions });
     closeModal();
   };
   return (
@@ -62,6 +70,27 @@ export default function UserInfoCard() {
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
                 Team Lead
+              </p>
+            </div>
+            <div>
+              <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                Role
+              </p>
+              <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                {roleTypes.find((r) => r.id === selectedRole)?.name || "-"}
+              </p>
+            </div>
+            <div>
+              <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                Permissions
+              </p>
+              <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                {selectedPermissions.length
+                  ? permissionTypes
+                      .filter((p) => selectedPermissions.includes(p.id))
+                      .map((p) => p.name)
+                      .join(", ")
+                  : "-"}
               </p>
             </div>
           </div>
@@ -164,6 +193,38 @@ export default function UserInfoCard() {
                   <div className="col-span-2">
                     <Label>Bio</Label>
                     <Input type="text" value="Team Lead" />
+                  </div>
+
+                  <div className="col-span-2">
+                    <Label>Role</Label>
+                    <Select
+                      options={roleTypes.map((r) => ({ value: r.id, label: r.name }))}
+                      placeholder="Select role"
+                      defaultValue={selectedRole}
+                      onChange={(v) => setSelectedRole(v)}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <Label>Permissions</Label>
+                    <div className="space-y-2">
+                      {permissionTypes.map((perm) => (
+                        <label key={perm.id} className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={selectedPermissions.includes(perm.id)}
+                            onChange={() => {
+                              setSelectedPermissions((prev) =>
+                                prev.includes(perm.id)
+                                  ? prev.filter((id) => id !== perm.id)
+                                  : [...prev, perm.id]
+                              );
+                            }}
+                            className="h-4 w-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500"
+                          />
+                          <span className="text-sm text-gray-700 dark:text-gray-300">{perm.name}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
