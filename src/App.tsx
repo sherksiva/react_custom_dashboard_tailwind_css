@@ -11,6 +11,7 @@ const CompleteForm = lazy(() => import("./pages/Forms/CompleteForm"));
 const Roles = lazy(() => import("./pages/OtherPage/Roles"));
 const Permissions = lazy(() => import("./pages/OtherPage/Permissions"));
 const StyleMatrix = lazy(() => import("./components/common/StyleMatrix"));
+const Tracking = lazy(() => import("./pages/Tracking"));
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 
@@ -40,6 +41,7 @@ export default function App() {
             {/* <Route path="/blank" element={<Blank />} /> */}
             <Route path="/search" element={<SearchComponent />} />
             <Route path="/todo" element={<ToDo />} />
+            <Route path="/tracking" element={<Tracking />} />
             {/* Forms */}
             <Route path="/complete-form" element={<CompleteForm />} />
             {/* <Route path="/form-elements" element={<FormElements />} /> */}

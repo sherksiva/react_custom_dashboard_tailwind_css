@@ -62,6 +62,11 @@ const navItems: NavItem[] = [
     path: "/todo",
   },
   {
+    icon: <BoxCubeIcon />,
+    name: "Tracking",
+    path: "/tracking",
+  },
+  {
     name: "Forms",
     icon: <ListIcon />,
     subItems: [{ name: "Complete Form", path: "/complete-form", pro: false }],
