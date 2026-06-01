@@ -7,6 +7,8 @@ const UserProfiles = lazy(() => import("./pages/UserProfiles"));
 const SearchComponent = lazy(() => import("./pages/Searchbar/searchbar"));
 const ToDo = lazy(() => import("./pages/ToDo/ToDo"));
 const Home = lazy(() => import("./pages/Dashboard/Home"));
+const Orders = lazy(() => import("./pages/Orders"));
+const Purchasing = lazy(() => import("./pages/Purchasing"));
 const CompleteForm = lazy(() => import("./pages/Forms/CompleteForm"));
 const Roles = lazy(() => import("./pages/OtherPage/Roles"));
 const Permissions = lazy(() => import("./pages/OtherPage/Permissions"));
@@ -34,6 +36,8 @@ export default function App() {
 
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/purchasing" element={<Purchasing />} />
             <Route path="/style-matrix" element={<StyleMatrix />} />
             <Route path="/roles" element={<Roles />} />
             <Route path="/permissions" element={<Permissions />} />
